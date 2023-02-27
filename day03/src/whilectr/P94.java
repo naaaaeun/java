@@ -4,7 +4,7 @@ public class P94 {
 
 	public static void main(String[] args) {
 		//1부터 100까지의 짝수의 합과 평균을 구하시오
-		
+		int bb=200;
 		int cnt=0;
 		int sum = 0;
 		double avr = 0;
