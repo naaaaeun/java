@@ -42,6 +42,8 @@ public class Employee {
 		this("10000", name, salary); // 메소드의 가장 윗줄에 작성해야함.
 	}
 
+	
+	
 	public int getAnnSalary() {
 		return salary * 12;
 	}
