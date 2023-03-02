@@ -16,7 +16,7 @@ public class App {
 		acc[5]=new Account("james6", 10000, 0.31, "VIP");
 		//2
 		for(Account a:acc) {
-			System.out.println(a.toString());
+			System.out.println(a);
 		}
 		//3
 		for(Account a:acc) {
