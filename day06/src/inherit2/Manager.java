@@ -29,7 +29,7 @@ public class Manager extends Employee{
 	}
 
 
-	@Override
+	@Override //annotation
 	public double getAnnSalary() {
 		double result=0.0;
 		result=(this.getSalary()+this.bonus)*12;
