@@ -30,7 +30,7 @@ public class App {
 			} else if (cmd.equals("d")) {
 				System.out.println("Input ID to delete..");
 				String id = sc.next();
-				s.remove(id); // ??? 클래스 안의 id로 해당 클래스 선택?
+				s.remove(id); 
 
 			} else if (cmd.equals("u")) {
 				System.out.println("Input ID..");
