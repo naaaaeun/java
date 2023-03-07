@@ -7,7 +7,7 @@ public class App {
 	public static void main(String[] args) {
 		Account a = null;
 		try {
-			a = new Account("1234","one","naeun",1000.0);
+			a = new Account("one","naeun",1000.0);
 		} catch (NegativeException e) {
 			System.out.println(e.getMessage());
 		}//계좌 생성

@@ -1,5 +1,5 @@
 package ws0307;
- 
+
 
 public class Account {
 	private String accNo;
@@ -9,15 +9,16 @@ public class Account {
 
 	// constructor ->음수 예외 상황
 	public Account() {
+		this.accNo = MakeAccountNumber.makeAccountNum();
 	}
 
-	public Account(String accNo, String name, String accHolder, double balance) throws NegativeException {
+	public Account( String name, String accHolder, double balance) throws NegativeException {
+		this();
+		this.name = name;
+		this.accHolder = accHolder;
 		if(balance<0) {
 			throw new NegativeException("음수값이 입력되었습니다");
 		}
-		this.accNo = accNo;
-		this.name = name;
-		this.accHolder = accHolder;
 		this.balance = balance;
 	}
 
