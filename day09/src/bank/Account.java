@@ -1,6 +1,5 @@
 package bank;
 
-import cal.InfinityException;
 
 public class Account {
 	private String accNo;
@@ -10,10 +9,11 @@ public class Account {
 
 	// constructor ->음수 예외 상황
 	public Account() {
+		this.accNo = MakeAccountNumber.makeAccountNum();
 	}
 
-	public Account(String accNo, String name, String accHolder, double balance) throws NegativeException {
-		this.accNo = accNo;
+	public Account( String name, String accHolder, double balance) throws NegativeException {
+		this();
 		this.name = name;
 		this.accHolder = accHolder;
 		if(balance<0) {
