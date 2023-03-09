@@ -17,7 +17,7 @@ public class Lotto {
 
 		this.prizeMoney = r.nextInt(2000000000) + 1;
 
-		System.out.println("결정된 당첨금액은 " + prizeMoney + "원 입니다.");
+		System.out.println("결정된 총 당첨금액은 " + prizeMoney + "원 입니다.");
 		System.out.println(winningNum); //test를 위한 화면표출
 	}
 
@@ -36,12 +36,10 @@ public class Lotto {
 
 	public double prizeMoney(int grade) {
 		switch (grade) {
-		case 3:
-			return prizeMoney*0.5; // 3개 맞춘 경우 1등
-		case 2:
-			return prizeMoney*0.3; // 3개 맞춘 경우 1등
-		case 1:
-			return prizeMoney*0.2; // 3개 맞춘 경우 1등
+		case 3:prizeMoney*=0.5;break; // 3개 맞춘 경우 1등
+		case 2:prizeMoney*=0.3;break; // 2개 맞춘 경우 2등
+		case 1:prizeMoney*=0.2;break; // 1개 맞춘 경우 3등
+		default:prizeMoney*=0;
 		}
 		return prizeMoney;
 	}
