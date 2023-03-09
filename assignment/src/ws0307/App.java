@@ -25,6 +25,7 @@ public class App {
 			}else if(cmd.equals("w")) {
 				System.out.println("How much do you want to withdraw");	//계좌 출금
 				double m =Double.parseDouble(sc.next());
+				
 				try {
 					System.out.println(a.withdraw(m));
 				} catch (NegativeException e) {
