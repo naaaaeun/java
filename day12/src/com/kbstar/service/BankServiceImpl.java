@@ -1,5 +1,6 @@
 package com.kbstar.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.kbstar.dao.AccountDAO;
@@ -72,11 +73,6 @@ public class BankServiceImpl implements BankService<UserDTO, AccountDTO, Transac
 		notification.sendEmail(user.getEmail(), accNo+"계좌개설 완료");
 	}
 
-	@Override
-	public List<TransactionDTO> getAllTr(String acc) throws Exception {
-		
-		return null;
-	}
 
 	@Override
 	public void transaction(String sendAcc, String receiveAcc, double balance, String desc) throws Exception {
@@ -101,8 +97,12 @@ public class BankServiceImpl implements BankService<UserDTO, AccountDTO, Transac
 
 	@Override
 	public List<AccountDTO> getAllAccount(String k) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return accountdao.search(k);
+	}
+
+	@Override
+	public List<TransactionDTO> getAllTr(String acc) throws Exception {
+		return trdao.search(acc);
 	}
 
 }
