@@ -2,28 +2,28 @@ package com.kbstar.frame;
 
 import java.util.Calendar;
 
-public class MakeItemNumber {
+public class MakeNumber {
 	public static int cnt = 100;
 	public static int cnt2 = 100;
 	public static String makeItemNum() {
-		String trNum = "";
+		String Num = "";
 		Calendar cal = Calendar.getInstance();
-		trNum = "" + cal.get(Calendar.YEAR)
+		Num = "" + cal.get(Calendar.YEAR)
 		            + (cal.get(Calendar.MONTH)+1)
 		            + cal.get(Calendar.DAY_OF_MONTH)
 		            + cal.get(Calendar.MILLISECOND)
 		            + cnt2;
 		cnt2++;
-		return trNum;
+		return Num;
 	}
-	public static String makeCartNum() {
-		String accNum = "";
+	public static String makeNum() {
+		String Num = "";
 		Calendar cal = Calendar.getInstance();
-		accNum = "" + cal.get(Calendar.YEAR)
+		Num = "" + cal.get(Calendar.YEAR)
 		            + (cal.get(Calendar.MONTH)+1)
 		            + cal.get(Calendar.DAY_OF_MONTH)
 		            + cnt;
 		cnt++;
-		return accNum;
+		return Num;
 	}
 }

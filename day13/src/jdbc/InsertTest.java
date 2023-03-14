@@ -1,6 +1,7 @@
 package jdbc;
 
 import java.sql.Connection;
+import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -12,60 +13,70 @@ public class InsertTest {
 		try {
 			Class.forName("oracle.jdbc.OracleDriver");
 		} catch (ClassNotFoundException e) {
-			System.out.println("드라이버가 없습니다.");
+			System.out.println("Driver가 없습니다.");
 			e.printStackTrace();
 			return;
 		}
-		System.out.println("로딩 성공");
-		// Connect //port 1521
+		System.out.println("Driver Loading 성공.");
+		// Connect
 		String id = "bank";
 		String pwd = "111111";
-		String url = "jdbc:oracle:thin:@127.0.0.1:1521:XE";
-		String insertSql = "INSERT INTO cust VALUES(?,?,?,?)";
+		String url = "jdbc:oracle:thin:@172.16.21.44:1521:XE";
 		Connection con = null;
-		PreparedStatement pstmt = null;
-
-
-		// Statement 생성-SQL
-		// SQL 전송
 		try {
 			con = DriverManager.getConnection(url, id, pwd);
+		} catch (SQLException e) {
+			System.out.println("접속 실패 !!");
+			e.printStackTrace();
+			return;
+		}
+		System.out.println("접속 성공 !!");
+		
+		// Statement 생성 - SQL
+		// SQL 전송
+		String insertSql = "INSERT INTO cust VALUES(?,?,?,?)";
+		PreparedStatement pstmt = null;
+		try {
 			pstmt = con.prepareStatement(insertSql);
-			pstmt.setString(1, "id08");
+			pstmt.setString(1, "id10");
 			pstmt.setString(2, "pwd10");
-			pstmt.setString(3, "김길동");
-			pstmt.setInt(4, 1);
+			pstmt.setString(3, "홍길동");
+			pstmt.setInt(4, 50);
 			int result = pstmt.executeUpdate();
-			System.out.println("결과:" + result);
+			System.out.println(result);
+			
 		} catch (SQLException e1) {
-			System.out.println("삽입 실패");
 			e1.printStackTrace();
-
 		} finally {
 			try {
-				if (pstmt != null) {
-					pstmt.close();
+				if(pstmt != null) {
+					pstmt.close();	
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			try {
-				if (con != null) {
-					con.close();
-				}
-			} catch (SQLException e) {
-				System.out.println("종료 실패!");
-				e.printStackTrace();
-				return;
-			}
-			System.out.println("종료 성공!");
 		}
-
-		// 결과받기
-
-		// Close
 		
+		
+		// 결과 받기
+		
+		// Close
+		try {
+			if(con != null) {
+				con.close();
+			}
+		} catch (SQLException e) {
+			System.out.println("close 실패 !!");
+			e.printStackTrace();
+		}
+		
+		System.out.println("close 성공 !!");
+
 	}
 
 }
+
+
+
+
+

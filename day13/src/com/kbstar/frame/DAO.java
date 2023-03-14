@@ -6,19 +6,15 @@ import java.sql.DriverManager;
 import java.util.List;
 import java.util.Properties;
 
-public interface DAO<K, k2, V> {
+public interface DAO<K1,K2,V> {
 	public void insert(V v) throws Exception;
-
-	public void delete(K k) throws Exception;
-
+	public void delete(K1 k) throws Exception;
 	public void update(V v) throws Exception;
-
-	public V select(K k) throws Exception;
-
+	public V select(K1 k) throws Exception;
 	public List<V> selectAll() throws Exception;
-
-	public List<V> search(k2 k) throws Exception;
-
+	
+	public List<V> search(K2 k) throws Exception;
+	
 	public default Connection getConnection() throws Exception {
 		Connection con = null;
 
@@ -33,4 +29,5 @@ public interface DAO<K, k2, V> {
 		con = DriverManager.getConnection(url, id, pwd);
 		return con;
 	}
+	
 }

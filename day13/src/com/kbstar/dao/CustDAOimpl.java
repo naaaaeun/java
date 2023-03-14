@@ -27,7 +27,7 @@ public class CustDAOimpl implements DAO<String, String, Cust> {
 	@Override
 	public void insert(Cust v) throws Exception {
 
-		try (Connection con = getConnection(); PreparedStatement pstmt = con.prepareStatement(Sql.insertSql);) {
+		try (Connection con = getConnection(); PreparedStatement pstmt = con.prepareStatement(Sql.custInsertSql);) {
 			pstmt.setString(1, v.getId());
 			pstmt.setString(2, v.getPwd());
 			pstmt.setString(3, v.getName());
@@ -45,7 +45,7 @@ public class CustDAOimpl implements DAO<String, String, Cust> {
 
 	@Override
 	public void delete(String k) throws Exception {
-		try (Connection con = getConnection(); PreparedStatement pstmt = con.prepareStatement(Sql.deleteSql);) {
+		try (Connection con = getConnection(); PreparedStatement pstmt = con.prepareStatement(Sql.custDeleteSql);) {
 			pstmt.setString(1, k);
 			int result = pstmt.executeUpdate();
 			System.out.println("결과:" + result);
@@ -57,7 +57,7 @@ public class CustDAOimpl implements DAO<String, String, Cust> {
 
 	@Override
 	public void update(Cust v) throws Exception {
-		try (Connection con = getConnection(); PreparedStatement pstmt = con.prepareStatement(Sql.updateSql);) {
+		try (Connection con = getConnection(); PreparedStatement pstmt = con.prepareStatement(Sql.custUpdateSql);) {
 			pstmt.setString(1, v.getPwd());
 			pstmt.setString(2, v.getName());
 			pstmt.setInt(3, v.getAge());
@@ -73,7 +73,7 @@ public class CustDAOimpl implements DAO<String, String, Cust> {
 	@Override
 	public Cust select(String k) throws Exception {
 		Cust cust = null;
-		try (Connection con = getConnection(); PreparedStatement pstmt = con.prepareStatement(Sql.selectSql);) {
+		try (Connection con = getConnection(); PreparedStatement pstmt = con.prepareStatement(Sql.custSelectSql);) {
 			pstmt.setString(1, k);
 			try (ResultSet rset = pstmt.executeQuery()) {
 				rset.next();
@@ -96,7 +96,7 @@ public class CustDAOimpl implements DAO<String, String, Cust> {
 	@Override
 	public List<Cust> selectAll() throws Exception {
 		List<Cust> list = new ArrayList<Cust>();
-		try (Connection con = getConnection(); PreparedStatement pstmt = con.prepareStatement(Sql.selectAllSql)) {
+		try (Connection con = getConnection(); PreparedStatement pstmt = con.prepareStatement(Sql.custSelectAllSql)) {
 			try (ResultSet rset = pstmt.executeQuery();) {
 				while (rset.next()) {
 					Cust cust = null;

@@ -4,39 +4,38 @@ import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.SQLRecoverableException;
 import java.util.List;
 
-import com.kbstar.dao.ItemDAOimpl;
-import com.kbstar.dto.Item;
+import com.kbstar.dao.CartDAOImpl;
+import com.kbstar.dto.Cart;
 import com.kbstar.frame.CRUDService;
 import com.kbstar.frame.DAO;
 import com.kbstar.frame.MakeNumber;
 
-public class ItemCRUDServiceImpl implements CRUDService<String, Item>{
+public class CartCRUDServiceImple implements CRUDService<String, Cart> {
+	DAO<String, String, Cart> dao;
 
-	DAO<String, String, Item> dao;
-	
-	public ItemCRUDServiceImpl() {
-		dao = new ItemDAOimpl();
+	public CartCRUDServiceImple() {
+		dao = new CartDAOImpl();
 	}
-	
+
 	@Override
-	public void register(Item v) throws Exception {
+	public void register(Cart v) throws Exception {
 		try {
 			String id = MakeNumber.makeItemNum();
 			v.setId(id);
 			dao.insert(v);
-		}catch(Exception e) {
-			if(e instanceof SQLIntegrityConstraintViolationException) {
-				throw new Exception("ID가 중복 되었습니다.");
-			}else {
-				throw new Exception("시스템 장애 입니다.");
-			}
+			System.out.println("등록 성공");
+		} catch (Exception e) {
+			throw new Exception("시스템 장애 입니다.");
+
 		}
+
 	}
 
 	@Override
-	public void modify(Item v) throws Exception {
+	public void modify(Cart v) throws Exception {
 		try {
 			dao.update(v);
+			System.out.println("변경 성공");
 		}catch(Exception e) {
 			if(e instanceof SQLRecoverableException) {
 				throw new Exception("시스템 장애");
@@ -50,39 +49,41 @@ public class ItemCRUDServiceImpl implements CRUDService<String, Item>{
 	public void remove(String k) throws Exception {
 		try {
 			dao.delete(k);
+			System.out.println("삭제성공");
 		}catch(Exception e) {
 			if(e instanceof SQLRecoverableException) {
 				throw new Exception("시스템 장애");
 			}else {
-				throw new Exception("해당 ID가 존재 하지 않습니다.");
+				throw new Exception(k+"는 존재하지 않는 id 입니다.");
 			}
-		}		
+		}
+
 	}
 
 	@Override
-	public Item get(String k) throws Exception {
-		Item item = null;
+	public Cart get(String k) throws Exception {
+		Cart cart= null;
 		try {
-			item = dao.select(k);
+			cart=dao.select(k);
 		}catch(Exception e) {
 			if(e instanceof SQLRecoverableException) {
 				throw new Exception("시스템 장애 입니다.");
 			}else {
 				throw new Exception("ID가 존재 하지 않습니다.");
-			}
+			}			
 		}
-		return item;
+		return cart;
 	}
 
 	@Override
-	public List<Item> get() throws Exception {
-		List<Item> list = null;
+	public List<Cart> get() throws Exception {
+		List<Cart> list= null;
 		try {
-			list = dao.selectAll();
+			list=dao.selectAll();
 		}catch(Exception e) {
 			if(e instanceof SQLRecoverableException) {
 				throw new Exception("시스템 장애 입니다.");
-			}
+			}			
 		}
 		return list;
 	}
