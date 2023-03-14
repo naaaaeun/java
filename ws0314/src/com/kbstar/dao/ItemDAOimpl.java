@@ -44,11 +44,10 @@ public class ItemDAOimpl implements DAO<String, String, Item> {
 			pstmt.setString(1, k);
 			int result = pstmt.executeUpdate();
 			if (result == 0) {
-				System.out.println(k + "는 없는 id입니다.");
+				throw new Exception();
 			}
 		} catch (Exception e1) {
-
-			e1.printStackTrace();
+			throw e1;
 		}
 	}
 

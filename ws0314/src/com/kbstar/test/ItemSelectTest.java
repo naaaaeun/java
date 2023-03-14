@@ -5,15 +5,23 @@ import com.kbstar.frame.CRUDService;
 import com.kbstar.service.ItemCRUDServiceImpl;
 
 public class ItemSelectTest {
-	public static void main(String[] args) {
-		Item item = new Item();
-		CRUDService<String, Item> itemService = new ItemCRUDServiceImpl();
 
+	public static void main(String[] args) {
+		CRUDService<String, Item> crudService =
+				new ItemCRUDServiceImpl();
+		Item item = null;
 		try {
-			item = itemService.get("2023314864100");
+			item = crudService.get("2023314752100");
 			System.out.println(item);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 	}
+
 }
+
+
+
+
+
+
