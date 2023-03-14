@@ -4,6 +4,6 @@ public class Sql {
 	public static String deleteSql = "DELETE FROM cust WHERE id= ?";
 	public static String insertSql = "INSERT INTO CUST VALUEs(?,?,?,?)";
 	public static String updateSql = "UPDATE cust SET pwd=?, name=?, age=? WHERE id= ?";
-	public static String selectSql = "SELECT FROM cust WHERE id= ?";
+	public static String selectSql = "SELECT * FROM cust WHERE id= ?";
 	public static String selectAllSql = "SELECT * FROM CUST";
 }

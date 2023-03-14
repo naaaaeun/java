@@ -1,8 +1,5 @@
 package com.kbstar.dao;
 
-import com.kbstar.frame.DAO;
-import com.kbstar.frame.Sql;
-
 import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,10 +7,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
 import com.kbstar.dto.Cust;
+import com.kbstar.frame.DAO;
+import com.kbstar.frame.Sql;
 
 public class CustDAOimpl implements DAO<String, String, Cust> {
 	public CustDAOimpl() {
@@ -90,42 +90,45 @@ public class CustDAOimpl implements DAO<String, String, Cust> {
 
 	@Override
 	public Cust select(String k) throws Exception {
+		Cust cust = null;
 		try (Connection con = getConnection(); PreparedStatement pstmt = con.prepareStatement(Sql.selectSql);) {
-			try{
-				pstmt.setString(1, k);
-				ResultSet rset = pstmt.executeQuery();
+			pstmt.setString(1, k);
+			try (ResultSet rset = pstmt.executeQuery()) {
 				rset.next();
-				String db_id = rset.getString("id");
+				String id = rset.getString("id");// 테이블 컬럼 명. 숫자로도 가능. 그러나 컬럼 명이 더 가독성 좋음.
 				String name = rset.getString("name");
+				String pwd = rset.getString("pwd");
 				int age = rset.getInt("age");
-				System.out.println(db_id + " " + name + " " + age);
-			}catch(Exception e) {
-			System.out.println("실패");
-			e.getStackTrace();
+				cust = new Cust(id, pwd, name, age);
+			} catch (Exception e) {
+				throw e;
 			}
-		}catch (Exception e1) {
-			System.out.println("실패1");
-			e1.getStackTrace();
-			}
-		return null;
+		} catch (Exception e1) {
+			throw e1;
+		}
+
+		return cust;
+
 	}
 
 	@Override
 	public List<Cust> selectAll() throws Exception {
-		try (Connection con = getConnection(); PreparedStatement pstmt = con.prepareStatement(Sql.selectAllSql);) {
-			try (ResultSet rset = pstmt.executeQuery()) {
+		List<Cust> list = new ArrayList<Cust>();
+		try (Connection con = getConnection(); PreparedStatement pstmt = con.prepareStatement(Sql.selectAllSql)) {
+			try (ResultSet rset = pstmt.executeQuery();) {
 				while (rset.next()) {
-					String db_id = rset.getString("id");
+					Cust cust = null;
+					String id = rset.getString("id");
+					String pwd = rset.getString("pwd");
 					String name = rset.getString("name");
 					int age = rset.getInt("age");
-					System.out.println(db_id + " " + name + " " + age);
+					cust = new Cust(id, pwd, name, age);
+					list.add(cust);
 				}
-			} catch (SQLException e) {
-				e.getStackTrace();
+			} catch (Exception e) {
 			}
-		} catch (SQLException e1) {
-			System.out.println("실패");
-			e1.getStackTrace();
+		} catch (Exception e) {
+			throw e;
 		}
 		return null;
 	}
