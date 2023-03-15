@@ -1,6 +1,5 @@
 package com.kbstar.service;
 
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.SQLRecoverableException;
 import java.util.List;
 

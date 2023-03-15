@@ -1,9 +1,6 @@
 package com.kbstar.test;
 
-import java.util.List;
-
 import com.kbstar.dto.Cart;
-import com.kbstar.dto.Cust;
 import com.kbstar.frame.CRUDService;
 import com.kbstar.service.CartCRUDServiceImple;
 
@@ -12,13 +9,13 @@ public class CartTest {
 	public static void main(String[] args) {
 		CRUDService<String, Cart> crudService =
 				new CartCRUDServiceImple();
-//		//register test
-//		Cart cart = new Cart("userid2", "item_id2", 40);
-//		try {
-//			crudService.register(cart);
-//		} catch (Exception e) {
-//			System.out.println(e.getMessage());
-//		}
+		//register test
+		Cart cart = new Cart("이도현", "아메", 40);
+		try {
+			crudService.register(cart);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 //		//delete test
 //		try {
 //			crudService.remove("2023314550100");
@@ -49,13 +46,13 @@ public class CartTest {
 //			System.out.println(e.getMessage());
 //		}
 		//get one test
-		Cart cart=null;
-		try {
-			cart= crudService.get("2023314254100");
-			System.out.println(cart);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+//		Cart cart=null;
+//		try {
+//			cart= crudService.get("2023314254100");
+//			System.out.println(cart);
+//		} catch (Exception e) {
+//			System.out.println(e.getMessage());
+//		}
 		//끝
 	}
 

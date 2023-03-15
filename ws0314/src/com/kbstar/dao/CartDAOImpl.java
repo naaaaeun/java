@@ -3,13 +3,11 @@ package com.kbstar.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLRecoverableException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import com.kbstar.dto.Cart;
-import com.kbstar.dto.Item;
 import com.kbstar.frame.DAO;
 import com.kbstar.frame.Sql;
 
@@ -33,7 +31,10 @@ public class CartDAOImpl implements DAO<String, String, Cart> {
 			pstmt.setString(2, v.getUser_id());
 			pstmt.setString(3, v.getItem_id());
 			pstmt.setInt(4, v.getCnt());
-			pstmt.executeUpdate();
+			int result = pstmt.executeUpdate();
+			if (result ==0) {
+				throw new Exception();
+			}
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
@@ -111,8 +112,26 @@ public class CartDAOImpl implements DAO<String, String, Cart> {
 
 	@Override
 	public List<Cart> search(String k) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		List<Cart> list = new ArrayList<>();
+		try (Connection con = getConnection(); PreparedStatement pstmt = con.prepareStatement(Sql.cartSelectByUserSql);) {
+			pstmt.setString(1, k);
+			try (ResultSet rset = pstmt.executeQuery();) {
+				while (rset.next()) {
+					Cart cart=null;
+					String db_id = rset.getString("id");
+					String name = rset.getString("user_id");
+					String item = rset.getString("item_id");
+					int cnt = rset.getInt("cnt");
+					Date regdate = rset.getDate("regdate");
+					cart=new Cart(db_id, name, item,cnt,regdate);
+					list.add(cart);
+				}
+			} catch (Exception e) {
+			}
+		} catch (Exception e) {
+			throw e;
+		}
+		return list;
 	}
 
 }

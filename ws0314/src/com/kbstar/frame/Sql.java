@@ -22,7 +22,6 @@ public class Sql {
 	public static String cartUpdateSql = "UPDATE cart SET cnt=? WHERE id=?";
 	public static String cartSelectSql = "Select * FROM cart WHERE id=?";
 	public static String cartSelectByUserSql = "Select * FROM cart WHERE user_id=?";
-	public static String cartSelectByItemSql = "SELECT * FROM cart WHERE item_id=?";
 	public static String cartSelectAllSql = "SELECT * FROM cart";
 
 }
