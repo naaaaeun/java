@@ -1,7 +1,7 @@
 package ws0228;
 
 public class App {
-
+//test
 	public static void main(String[] args) {
 		Employee[] e= new Employee[5];
 		Manager[] m= new Manager[5];
